@@ -17,7 +17,7 @@
 	<version>0.1.0-SNAPSHOT</version>
 
 	<name>Channels Plus</name>                                                        <!-- FIXME: Your project name here          -->
-	<description>A hevy-weight channels tool plugin for ImageJ and Fiji</description> <!-- FIXME: Your project description here   -->
+	<description>A heavy-weight channels tool plugin for ImageJ and Fiji</description> <!-- FIXME: Your project description here   -->
 	<url>https://www.grocottlab.com</url>                                             <!-- FIXME: Your project website here       -->
 	<inceptionYear>2023</inceptionYear>                                               <!-- FIXME: Your project starting year here -->
 	<organization>
