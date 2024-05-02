@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+		http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.scijava</groupId>
+		<artifactId>pom-scijava</artifactId>
+		<version>31.1.0</version>
+		<relativePath />
+	</parent>
+
+	<groupId>com.grocottlab</groupId>        <!-- FIXME: Your organization groupId here -->
+	<artifactId>Channels_Plus</artifactId> <!-- FIXME: Your project artifactId here   -->
+	<version>0.1.0-SNAPSHOT</version>
+
+	<name>Channels Plus</name>                                                        <!-- FIXME: Your project name here          -->
+	<description>A hevy-weight channels tool plugin for ImageJ and Fiji</description> <!-- FIXME: Your project description here   -->
+	<url>https://www.grocottlab.com</url>                                             <!-- FIXME: Your project website here       -->
+	<inceptionYear>2023</inceptionYear>                                               <!-- FIXME: Your project starting year here -->
+	<organization>
+		<name>Grocott Lab</name>                                                  <!-- FIXME: Your organization name here    -->
+		<url>https://grocottlab.com/</url>                                        <!-- FIXME: Your organization website here -->
+	</organization>
+	<licenses>
+            <license>
+                <name>GNU General Public License (GPL), Version 3.0</name>
+                <url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+            </license>
+	</licenses>
+
+	<developers>
+		<!-- See https://imagej.net/contribute/governance#scijava-team-roles -->
+		<developer>
+			<id>GrocottLab</id>                <!-- FIXME: Your GitHub handle here -->
+			<name>Timothy Grocott</name>       <!-- FIXME: Your name here          -->
+			<url>https://grocottlab.com/</url> <!-- FIXME: Your website here       -->
+			<roles>
+				<role>founder</role>
+				<role>lead</role>
+				<role>developer</role>
+				<role>debugger</role>
+				<role>reviewer</role>
+				<role>support</role>
+				<role>maintainer</role>
+			</roles>
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
+			<name>None</name>
+		</contributor>
+	</contributors>
+
+	<mailingLists>
+		<mailingList>
+			<name>Image.sc Forum</name>
+			<archive>https://forum.image.sc/tag/imagej</archive>
+		</mailingList>
+	</mailingLists>
+
+	<scm>
+		<connection>scm:git:https://github.com/imagej/example-legacy-plugin</connection>
+		<developerConnection>scm:git:git@github.com:imagej/example-legacy-plugin</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/imagej/example-legacy-plugin</url>
+	</scm>
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/imagej/example-legacy-plugin/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<system>None</system>
+	</ciManagement>
+
+	<properties>
+		<package-name>com.grocottlab</package-name>                                              <!-- FIXME: Your project package prefix here -->
+		<main-class>com.grocottlab.Channels_Plus</main-class>                                          <!-- FIXME: Your project main class here, or delete for none -->
+		<license.licenseName>GNU General Public License (GPL), Version 3.0</license.licenseName> <!-- FIXME: Your license-maven-plugin license code here -->
+		<license.copyrightOwners>Timothy Grocott</license.copyrightOwners>                       <!-- FIXME: Your organization legal entity name here -->
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>ij</artifactId>
+		</dependency>
+	</dependencies>
+        
+        <!-- Copy binaries jar to Fiji plugins folder... -->
+        <build>
+            <plugins>
+                <!-- Make source jar... -->
+                
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                
+                <!-- Make javadocs jar... -->
+                <!--
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.7</version>
+                    <executions>
+                        <execution>
+                            <id>attach-javadoc</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>javadoc</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                -->
+                
+                <!-- Copy binaries jar to Fiji plugins folder... -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>copytoplugins</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                            <configuration>
+                                <target>
+                                    <copy todir="/Applications/Fiji.app/plugins/" file="target/${project.build.finalName}.jar"/>
+                                </target>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </build>
+</project>
